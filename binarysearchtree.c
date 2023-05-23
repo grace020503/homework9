@@ -30,10 +30,11 @@ Node* searchIterative(Node* head, int key);  /* search the node for the key */
 int freeBST(Node* head); /* free all memories allocated to the tree */
 
 /* you may add your own defined functions if necessary */
-char PrintStudent(){
-	char* name = "kim sieun", id = "2021053007";
+int PrintStudent(){
+	char* name = "kim sieun";
+	char* id = "2021053007";
 	printf("-----[%s][%s]-----",name, id);
-}
+};
 
 int main()
 {
@@ -133,9 +134,11 @@ int initializeBST(Node** h) {
 void inorderTraversal(Node* ptr)
 {
 	if(ptr) {
-		inorderTraversal(ptr->left); // 왼쪽 트리 재귀 호출
 		printf(" [%d] ", ptr->key);
+		inorderTraversal(ptr->left); // 왼쪽 트리 재귀 호출
+		printf(" [%d] ", ptr->left);
 		inorderTraversal(ptr->right); // 오른쪽 트리 재귀 호출
+		printf(" [%d] ", ptr->right);
 	}
 }
 
@@ -177,10 +180,7 @@ int insert(Node* head, int key)
 	while(ptr != NULL) {
 
 		/* if there is a node for the key, then just return */
-		if(ptr->key == key) return 1;{
-			free(newNode);
-			return 1; // 부모 노드와 연결
-		}
+		if(ptr->key == key) return 1;
 
 		/* we have to move onto children nodes,
 		 * keep tracking the parent using parentNode */
