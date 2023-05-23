@@ -172,7 +172,10 @@ int insert(Node* head, int key)
 	while(ptr != NULL) {
 
 		/* if there is a node for the key, then just return */
-		if(ptr->key == key) return 1;
+		if(ptr->key == key) return 1;{
+			free(newNode);
+			return 1; // 부모 노드와 연결
+		}
 
 		/* we have to move onto children nodes,
 		 * keep tracking the parent using parentNode */
@@ -203,40 +206,34 @@ int deleteLeafNode(Node* head, int key)
 		return -1;
 	}
 
-	if (head->left == NULL) {
-		printf("\n Nothing to delete!!\n");
-		return -1;
-	}
-
 	/* head->left is the root */
 	Node* ptr = head->left;
-
-
-	/* we have to move onto children nodes,
-	 * keep tracking the parent using parentNode */
 	Node* parentNode = head;
+	Node* leafNode = NULL;
 
 	while(ptr != NULL) {
 
 		if(ptr->key == key) {
 			if(ptr->left == NULL && ptr->right == NULL) {
+				leafNode = ptr;
 
 				/* root node case */
 				if(parentNode == head)
 					head->left = NULL;
 
 				/* left node case or right case*/
-				if(parentNode->left == ptr)
+				else if(parentNode->left == ptr)
 					parentNode->left = NULL;
 				else
 					parentNode->right = NULL;
 
-				free(ptr);
+				free(leafNode);
+				return 1;
 			}
 			else {
 				printf("the node [%d] is not a leaf \n", ptr->key);
 			}
-			return 1;
+			return -1;
 		}
 
 		/* keep the parent node */
@@ -256,7 +253,7 @@ int deleteLeafNode(Node* head, int key)
 
 	printf("Cannot find the node for key [%d]\n ", key);
 
-	return 1;
+	return -1;
 }
 
 Node* searchRecursive(Node* ptr, int key)
@@ -316,9 +313,3 @@ int freeBST(Node* head)
 	free(head);
 	return 1;
 }
-
-
-
-
-
-
