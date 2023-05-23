@@ -30,7 +30,10 @@ Node* searchIterative(Node* head, int key);  /* search the node for the key */
 int freeBST(Node* head); /* free all memories allocated to the tree */
 
 /* you may add your own defined functions if necessary */
-
+char PrintStudent(){
+	char* name = "kim sieun", id = "2021053007";
+	printf("-----[%s][%s]-----",name, id);
+}
 
 int main()
 {
@@ -38,6 +41,8 @@ int main()
 	int key;
 	Node* head = NULL;
 	Node* ptr = NULL;	/* temp */
+
+	PrintStudent();
 
 	do{
 		printf("\n\n");
@@ -128,9 +133,9 @@ int initializeBST(Node** h) {
 void inorderTraversal(Node* ptr)
 {
 	if(ptr) {
-		inorderTraversal(ptr->left);
+		inorderTraversal(ptr->left); // 왼쪽 트리 재귀 호출
 		printf(" [%d] ", ptr->key);
-		inorderTraversal(ptr->right);
+		inorderTraversal(ptr->right); // 오른쪽 트리 재귀 호출
 	}
 }
 
@@ -138,8 +143,8 @@ void preorderTraversal(Node* ptr)
 {
 	if(ptr) {
 		printf(" [%d] ", ptr->key);
-		preorderTraversal(ptr->left);
-		preorderTraversal(ptr->right);
+		preorderTraversal(ptr->left); // 왼쪽 트리 재귀 호출
+		preorderTraversal(ptr->right); // 오른쪽 트리 재귀 호출
 	}
 }
 
